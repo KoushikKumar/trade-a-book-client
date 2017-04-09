@@ -1,0 +1,284 @@
+body {
+  background-color:#ddbf89;
+  height:95vh;
+}
+
+.outer-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.book-cover {
+  width:70%;
+  background-color:#884444;
+  height:92vh;
+  margin-top:20px;
+  margin-left:10px;
+  position:relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.iphone-container {
+    width: 20%;
+    height: 75vh;
+    background-color: #f7fafb;
+    border: 1px solid black;
+    display: inline-flex;
+    border-radius: 20px;
+    margin-right: 40px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.iphone-mike {
+    width: 1vh;;
+    height: 1vh;
+    background-color: black;
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+.iphone-sensor {
+    width: 20%;
+    height: 1.1vh;
+    background-color: black;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+.iphone-screen {
+    width: 90%;
+    height: 55vh;
+    border: 1px solid black;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+.iphone-screen-content {
+    width: 100%;
+    height:43vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.navbar-buttons-container {
+    width: 100%;
+    align-self: flex-start;
+    height:6vh;
+    display: flex;
+}
+
+.navbar-buttons {
+    cursor: pointer;
+    font-family : Iskoola Pota;
+    font-size: 1.2vw;
+    border:1px solid black;
+    background-color: #EFEFEF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+
+.navbar-buttons:hover {
+    background-color: #DDD;
+    text-decoration: none;
+}
+
+.navbar-buttons:focus {
+    text-decoration: none;
+    color: black;
+}
+
+.my-books-button {
+    width:50%;
+    flex-grow: 1;
+    border-left: none;
+}
+
+.add-books-button {
+    width:50%;
+    flex-grow: 1;
+    border-left: none;
+    border-right: none;
+}
+
+.logo {
+    font-family : Century;
+    font-size : 2.5vw;
+    color : #231F20;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+}
+
+.logo:hover, .logo:focus {
+    text-decoration: none;
+    color:#231F20;
+}
+
+.profile-form-update-container {
+    width: 90%;
+    height: 33vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+
+.profile-update-input {
+    margin-bottom: 2vh;
+}
+
+.signup-form-container {
+    width: 90%;
+    height: 33vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form-container {
+    width: 90%;
+    height: 33vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form {
+    width: 100%;
+    height: 16vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-input {
+    width: 100%;
+}
+
+.input-password {
+    margin-top: -1vh;
+}
+
+.input-text-area {
+    margin-top: -1vh;
+}
+
+.input-text-area .form-control {
+    overflow: auto;
+    resize: none;
+}
+
+.login-form-error-message {
+    color: red;
+    font-size: 2vh;
+}
+
+.signup-form-error-message {
+    color: red;
+    font-size: 2vh;
+}
+
+.profile-update-form-error-message {
+    color: red;
+    font-size: 2vh;
+}
+
+.iphone-screen-buttons-container {
+    width: 100%;
+    height:12vh;
+    display: flex;
+    align-items: center;
+}
+
+.iphone-screen-buttons-inner-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.is-already-a-member {
+    font-family : Myriad Pro;
+    font-size: 2.2vh;
+    cursor: pointer;
+    height:5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.is-already-a-member:focus {
+    text-decoration: none;
+}
+
+.iphone-screen-buttons {
+    width: 100%;
+    height:7vh;
+    display: flex;
+    align-self: flex-end;
+}
+
+.brand-buttons {
+    background-color: #D9534F;
+    border: 1px solid #514C4E;
+    cursor: pointer;
+    font-family : Iskoola Pota;
+    font-size: 1.5vw;
+    border-top-color: #514C4E;
+    color : #FCFAFC;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.brand-buttons:hover {
+    background-color: #af4b4b;
+    text-decoration: none;
+    color: #FCFAFC;
+}
+
+.brand-buttons:focus {
+    text-decoration: none;
+    color: #FCFAFC;
+}
+
+.left-button {
+    flex-grow: 1;
+    border-right-color: #514C4E;
+    border-left: none;
+}
+
+.right-button {
+    flex-grow: 1;
+    border-left-color: #D9534F;
+    border-right: none;
+}
+
+.right-button:hover {
+    border-left-color: #af4b4b;
+}
+
+.iphone-unlock {
+    width:7.5vh;
+    height:7.5vh;
+    border: 1px solid black;
+    margin-top: 20px;
+    border-radius: 30px;
+    background-color:white;
+    box-shadow: 1px 1px #ccc;
+}

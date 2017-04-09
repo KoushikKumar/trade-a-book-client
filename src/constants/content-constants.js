@@ -1,0 +1,15 @@
+export const BRAND_NAME = "TradeABook";
+export const ALREADY_A_MEMBER = "Already a member?";
+export const NOT_A_MEMBER_YET = "Not a member yet?";
+export const LOG_IN = "Log In";
+export const SIGN_UP = "Sign Up";
+export const TOKEN_KEY = "userToken";
+export const PROFILE = "Profile";
+export const LOG_OUT = "Log Out";
+export const UNAUTHORIZED = "Unauthorized";
+export const TOKEN = "token";
+export const AUTHORIZATION = "authorization";
+export const AUTHORIZED = "authorized";
+export const UPDATE = "Update";
+export const CANCEL = "Cancel";
+export const READ_ONLY = "readOnly";
