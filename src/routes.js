@@ -6,12 +6,12 @@ import App from './components/app';
 import Home from './components/home';
 import SignUp from './components/signup';
 import Login from './components/login';
-import MyBooks from './components/my_books';
-import AddBook from './components/add_book';
+import MyBooks from './components/my-books';
+import AddBook from './components/add-book';
 import Profile from './components/profile';
 import { SIGNUP, LOGIN, MY_BOOKS, ADD_BOOK, UPDATE_PROFILE } from './constants/routes-constants';
-import requireUnAuth from './components/hoc/require_unauthentication';
-import requireAuth from './components/hoc/require_authentication';
+import requireUnAuth from './components/hoc/require-unauthentication';
+import requireAuth from './components/hoc/require-authentication';
 
 export default (
     <Route path ="/" component = {App} >

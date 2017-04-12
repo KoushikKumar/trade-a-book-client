@@ -6,7 +6,7 @@ body {
 .outer-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around; 
 }
 
 .book-cover {
@@ -18,6 +18,154 @@ body {
   position:relative;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+}
+
+.pages {
+    width:98%;
+    height:88vh;
+    position: absolute;
+}
+
+.page {
+  width:50%;
+  background-color:white;
+  height:88vh;
+  display:inline-block;
+  position: absolute;
+}
+
+.page-left {
+  border-right: 1px solid grey;
+  left:5px;
+  background: -webkit-linear-gradient(left, white 90%, #DDD); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, white 90%, #DDD); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, white 90%, #DDD); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, white 90%, #DDD); /* Standard syntax */
+}
+
+.page-right {
+  border-left: 1px solid grey;
+  right:5px;
+  background: -webkit-linear-gradient(right, white 90%, #DDD); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(left, white 90%, #DDD); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(left, white 90%, #DDD); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to left, white 90%, #DDD); /* Standard syntax */
+}
+
+.page1 {
+    left:2px;
+}
+
+.page2 {
+    left:3px;
+    border-left:1px solid grey;
+}
+
+.page3 {
+    border-left:1px solid grey;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.page4 {
+    right:2px;
+}
+
+.page5 {
+    right:3px;
+    border-right:1px solid grey;
+}
+
+.page6 {
+    border-right:1px solid grey;
+}
+
+.book-outer-container {
+    width: 100%;
+    height: 80vh;
+    align-self: flex-start;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.book-container {
+    width: 26%;
+    height: 23vh;
+    display: flex;
+}
+
+.book-container:nth-child(3n) {
+    margin-right:6px;
+}
+
+.book-image {
+    width:100%;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.page-footer {
+    width: 100%;
+    height: 8vh;
+    align-self: flex-end;
+    display: flex;
+    align-items: center;
+}
+
+.previous-page-container {
+    width: 100%;
+    height: 8vh;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    
+}
+
+.previous-page {
+    margin-left: 15px;
+    font-family : Garamond;
+    cursor: pointer;
+}
+
+.page-number-container-left {
+    width: 100%;
+    height: 8vh;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.page-number-container-right {
+    width: 100%;
+    height: 8vh;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.page-number {
+    font-family : Garamond;
+}
+
+.next-page-container {
+    width: 100%;
+    height: 8vh;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.next-page {
+    margin-right: 20px;
+    font-family : Garamond;
+    cursor: pointer;
 }
 
 .iphone-container {
@@ -27,7 +175,6 @@ body {
     border: 1px solid black;
     display: inline-flex;
     border-radius: 20px;
-    margin-right: 40px;
     flex-direction: column;
     align-items: center;
 }
