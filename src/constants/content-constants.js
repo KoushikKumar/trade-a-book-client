@@ -13,3 +13,5 @@ export const AUTHORIZED = "authorized";
 export const UPDATE = "Update";
 export const CANCEL = "Cancel";
 export const READ_ONLY = "readOnly";
+export const REQUEST = "Request";
+export const SELLER_INFO = "Seller Information";

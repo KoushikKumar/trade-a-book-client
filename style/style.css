@@ -83,6 +83,47 @@ body {
     border-right:1px solid grey;
 }
 
+.page-outer-container {
+    width: 100%;
+}
+
+.book-title-and-author-container {
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+.book-title {
+    width:100%;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family : Californian FB;
+    font-size: 2vw;
+    word-wrap: break-word;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.book-author {
+    width:100%;
+    height: 3vh;
+    display: flex;
+    justify-content: center;
+    margin-top: -10px;
+    font-family : Baskerville Old Face;
+    color : #968C8F;
+    font-size: 1.1vw;
+}
+
+.book-author::before {
+    content: "-\00a0"
+}
+
 .book-outer-container {
     width: 100%;
     height: 80vh;
@@ -166,6 +207,141 @@ body {
     margin-right: 20px;
     font-family : Garamond;
     cursor: pointer;
+}
+
+.book-details-right-page-container {
+    width: 100%;
+    height: 88vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.book-image-details-container {
+    width: 90%;
+    height: 35vh;
+    margin-top: 15px;
+    display: flex;
+}
+
+.book-image-container-info {
+    width: 50%;
+    flex-grow: 1;
+    border: 1px solid grey;
+}
+
+.book-details-container-info {
+    width: 50%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+.book-detail-info {
+    width: 95%;
+    height: 3vh;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-family:  Palatino Linotype;
+    font-size: 2.2vh;
+    padding-left: 25px;
+}
+
+.book-author-info::before {
+    content: "Author:\00a0";
+    font-weight: bold;
+}
+
+.book-pages-info::before {
+    content: "No Of Pages:\00a0";
+    font-weight: bold;
+}
+
+.book-price-info::before {
+    content: "Price:\00a0";
+    font-weight: bold;
+}
+
+.book-year-info::before {
+    content: "Publication Year:\00a0";
+    font-weight: bold;
+}
+
+.book-description-container-info {
+    width: 90%;
+    height: 15vh;
+    word-wrap: break-word;
+    text-align: justify;
+    font-family : Palatino Linotype;
+    color : #5B595A;
+    font-size: 2vh;
+    overflow-y: auto;
+}
+
+.request-button-container-info {
+    width: 90%;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+}
+
+.request-button-info {
+    height: 5vh;
+    width: 30%;
+    background-color: #D9534F;
+    border: 1px solid #D9534F;
+    cursor: pointer;
+    color: white;
+    font-family : Iskoola Pota;
+    font-size: 1.3vw;
+}
+
+.request-button-info:hover {
+    background-color: #af4b4b;
+}
+
+.horizontal-line-info {
+    width: 90%;
+    height: 0.01vh;
+    background-color: black;
+}
+
+.seller-information-container-info {
+    width: 90%;
+    height: 10vh;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.seller-information-info {
+    width: 100%;
+    height:2.2vh;
+    display: flex;
+    align-items: center;
+}
+
+.seller-information-title-info {
+    font-family : Palatino Linotype;
+    color : #121212;
+    font-weight: bold;
+    font-size: 2.2vh;
+}
+
+.seller-information-name-info {
+    font-family : Plantagenet Cherokee;
+    color : #424142;
+    font-size: 2vh;
+}
+
+.seller-information-address-info {
+    font-family : Plantagenet Cherokee;
+    color : #424142;
+    font-size: 1.6vh;
+    margin-top: -5px;
 }
 
 .iphone-container {

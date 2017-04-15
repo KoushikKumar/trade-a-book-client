@@ -6,7 +6,7 @@ export default class Book extends Component {
     render() {
         return(
             <div className="book-cover">
-                <BookPages />   
+                <BookPages {...this.props} />   
             </div>
         );
     }

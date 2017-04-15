@@ -9,7 +9,8 @@ import Login from './components/login';
 import MyBooks from './components/my-books';
 import AddBook from './components/add-book';
 import Profile from './components/profile';
-import { SIGNUP, LOGIN, MY_BOOKS, ADD_BOOK, UPDATE_PROFILE } from './constants/routes-constants';
+import BookDetails from './components/book-details';
+import { SIGNUP, LOGIN, MY_BOOKS, ADD_BOOK, UPDATE_PROFILE, BOOK_DETAILS } from './constants/routes-constants';
 import requireUnAuth from './components/hoc/require-unauthentication';
 import requireAuth from './components/hoc/require-authentication';
 
@@ -21,5 +22,6 @@ export default (
         <Route path = { UPDATE_PROFILE } component = { requireAuth(Profile) } />
         <Route path = { MY_BOOKS }  component = {requireAuth(MyBooks)} />
         <Route path = { ADD_BOOK } component = {requireAuth(AddBook)} />
+        <Route path = { BOOK_DETAILS } component = {BookDetails} />
     </Route>
 );

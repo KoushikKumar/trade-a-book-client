@@ -1,7 +1,37 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { BOOK } from '../constants/routes-constants';
+import BookImageDetails from './book-image-details';
+import BookDescription from './book-description';
+import RequestButton from './request-book';
+import SellerInfo from './seller-info';
+
 class RightPage extends Component {
+
+    static contextTypes = {
+		router: React.PropTypes.object
+	}
+
+    renderRightPageContent() {
+        const {router} = this.context;
+        if(router.isActive(`/${BOOK}/${this.props.bookDetails}`)) {
+            return(
+                <div className="book-details-right-page-container">
+                    <BookImageDetails />
+                    <BookDescription />
+                    <RequestButton />
+                    <hr className="horizontal-line-info"/>
+                    <SellerInfo />
+                </div>
+            );   
+        }
+        return (
+            <div className="book-outer-container">
+                {this.renderImages()}
+            </div>
+        );
+    }
 
     renderImages() {
         const { rightPageNumber } = this.props;
@@ -13,17 +43,23 @@ class RightPage extends Component {
             return imagesToRender.map((book, counter) => {
                 return (
                     <div className="book-container" key={counter}>
-                        <img className="book-image" src={book.image}/>
+                        <img onClick={() => {this.viewBookDetailsPage(book)}} className="book-image" src={book.image}/>
                     </div>
                 );
             });
         }
     }
 
+    viewBookDetailsPage(book) {
+        const { router } = this.context;
+        const bookId = book._id;
+        router.push(`/${BOOK}/${bookId}`)
+    }
+
     render() {
         return (
-            <div className="book-outer-container">
-                {this.renderImages()}
+            <div className="page-outer-container">
+                {this.renderRightPageContent()}
             </div>
         );
     }

@@ -6,12 +6,13 @@ import { SIGN_UP_CLICKED,
          USER_DATA,
          UPDATE_PROFILE_CLICKED,
          ALL_BOOK_DATA,
-         LEFT_AND_RIGHT_PAGE_NUMBER } from './types';
+         LEFT_AND_RIGHT_PAGE_NUMBER,
+         BOOK_DETAILS_BY_ID } from './types';
 
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 
-import { SIGN_UP_URI, LOG_IN_URI, UPDATE_PROFILE_URI, FETCH_ALL_BOOK_DATA } from './uris';
+import { SIGN_UP_URI, LOG_IN_URI, UPDATE_PROFILE_URI, FETCH_ALL_BOOK_DATA, FETCH_BOOK_DETAILS_BY_ID } from './uris';
 import { TOKEN_KEY, UNAUTHORIZED, AUTHORIZATION, TOKEN } from '../constants/content-constants';
 
 export function signUpClicked(payload) {
@@ -124,4 +125,16 @@ export function fetchAllBooks() {
 
 export function setPageNumbers(leftPage, rightPage) {
     return { type:LEFT_AND_RIGHT_PAGE_NUMBER, payload:{left:leftPage, right:rightPage} }
+}
+
+export function fetchBookDetails(bookId) {
+    return function(dispatch) {
+        axios.get(FETCH_BOOK_DETAILS_BY_ID)
+            .then(response => {
+                dispatch({
+                    "type":BOOK_DETAILS_BY_ID,
+                    "payload":response.data
+                });
+            })
+    }
 }
