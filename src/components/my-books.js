@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Iphone from './iphone';
 import Book from './book';
+import { fetchMyBookDetails } from '../actions';
 
-export default class MyBooks extends Component {
+class MyBooks extends Component {
+
+    componentWillMount() {
+        this.props.fetchMyBookDetails();
+    }
+
     render() {
         return (
             <div className="outer-container">
@@ -13,3 +20,5 @@ export default class MyBooks extends Component {
         )
     }
 }
+
+export default connect(null, { fetchMyBookDetails })(MyBooks)

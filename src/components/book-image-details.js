@@ -2,24 +2,42 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class BookImageDetails extends Component {
+    
+    renderBookImageDetails() {
+        if(this.props.bookdetailsById && this.props.bookdetailsById.image) {
+            return this.renderDetails(this.props.bookdetailsById)
+        }
+        if(this.props.activeMyBookDetails && this.props.activeMyBookDetails.image) {
+            return this.renderDetails(this.props.activeMyBookDetails)
+        }
+    }
+
+    renderDetails(bookDetails) {
+        return (
+            <div className="book-image-details-inner-container">
+                <img className="book-image-container-info" src={bookDetails.image}/>
+                <div  className="book-details-container-info">
+                    <div className="book-detail-info book-author-info">
+                        {bookDetails.author}
+                    </div>
+                    <div className="book-detail-info book-pages-info">
+                        {bookDetails.pages}
+                    </div>
+                    <div className="book-detail-info book-price-info">
+                        {bookDetails.price}
+                    </div>
+                    <div className="book-detail-info book-year-info">
+                        {bookDetails.year}
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     render() {
         return(
             <div className="book-image-details-container">
-                <img className="book-image-container-info" src={this.props.bookdetailsById.image}/>
-                <div  className="book-details-container-info">
-                    <div className="book-detail-info book-author-info">
-                        {this.props.bookdetailsById.author}
-                    </div>
-                    <div className="book-detail-info book-pages-info">
-                        {this.props.bookdetailsById.pages}
-                    </div>
-                    <div className="book-detail-info book-price-info">
-                        {this.props.bookdetailsById.price}
-                    </div>
-                    <div className="book-detail-info book-year-info">
-                        {this.props.bookdetailsById.year}
-                    </div>
-                </div>
+                {this.renderBookImageDetails()}
             </div>
         );
     }
@@ -27,7 +45,8 @@ class BookImageDetails extends Component {
 
 function mapStateToProps(state) {
     return {
-        bookdetailsById: state.book.bookdetailsById
+        bookdetailsById: state.book.bookdetailsById,
+        activeMyBookDetails: state.book.activeMyBookDetails
     }
 }
 

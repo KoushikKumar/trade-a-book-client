@@ -9,7 +9,11 @@ import { SIGN_UP_CLICKED,
          LEFT_AND_RIGHT_PAGE_NUMBER,
          BOOK_DETAILS_BY_ID,
          PREVIOUS_LOCATION_PATH,
-         UPDATE_REQUEST_DETAILS } from './types';
+         UPDATE_REQUEST_DETAILS,
+         MY_BOOK_DETAILS,
+         MY_BOOKS_PAGE_NUMBER,
+         ACTIVE_MY_BOOK_DETAILS,
+         UPDATE_REQUESTED_STATUS } from './types';
 
 import axios from 'axios';
 import { browserHistory } from 'react-router';
@@ -19,7 +23,9 @@ import { SIGN_UP_URI,
          UPDATE_PROFILE_URI, 
          FETCH_ALL_BOOK_DATA, 
          FETCH_BOOK_DETAILS_BY_ID,
-         REQUEST_BOOK_URI } from './uris';
+         REQUEST_BOOK_URI,
+         GET_MY_BOOK_DETAILS_URI,
+         UPDATE_REQUESTED_STATUS_URI } from './uris';
 import { TOKEN_KEY, UNAUTHORIZED, AUTHORIZATION, TOKEN } from '../constants/content-constants';
 
 export function signUpClicked(payload) {
@@ -135,6 +141,10 @@ export function setPageNumbers(leftPage, rightPage) {
     return { type:LEFT_AND_RIGHT_PAGE_NUMBER, payload:{left:leftPage, right:rightPage} }
 }
 
+export function setSinglePageFooterPageNumber(payload) {
+    return { type:MY_BOOKS_PAGE_NUMBER, payload }
+}
+
 export function fetchBookDetails(bookId) {
     return function(dispatch) {
         axios.get(FETCH_BOOK_DETAILS_BY_ID)
@@ -172,3 +182,56 @@ export function requestBook(userName, address, bookId) {
         payload: {userName, address}
     }
 }
+
+export function fetchMyBookDetails() {
+    const userData = JSON.parse(localStorage.getItem(TOKEN_KEY));
+    const { userName } = userData.userName.toLowerCase();
+    return function(dispatch) {
+        axios.get("https://api.myjson.com/bins/tcwhb")  //TODO :: use `${GET_MY_BOOK_DETAILS_URI}/${userName}`
+            .then(response => {
+                dispatch(
+                    {
+                        type: MY_BOOK_DETAILS,
+                        payload: response.data
+                    }
+                )
+            })
+    }
+}
+
+export function updateActiveMyBookDetails(payload) {
+    return {
+        type: ACTIVE_MY_BOOK_DETAILS,
+        payload
+    }
+}
+
+export function updateRequestedStatus(status, bookId, buyerName) {
+    //TO DO as below
+    // const userData = JSON.parse(localStorage.getItem(TOKEN_KEY));
+    // const { userName } = userData.userName.toLowerCase();
+    // return function(dispatch) {
+    //     axios.post(UPDATE_REQUESTED_STATUS_URI, {status, bookId, buyerName, userName})
+    //         .then(response => {
+    //             dispatch(
+    //                 {
+    //                     type: UPDATE_REQUESTED_STATUS,
+    //                     payload: {
+    //                         status,
+    //                         bookId,
+                            //    buyerName
+    //                     }
+    //                 }
+    //             )
+    //         }
+    //     )
+    // }
+    return {
+        type: UPDATE_REQUESTED_STATUS,
+        payload: {
+            status,
+            bookId,
+            buyerName
+        }
+    }
+} 

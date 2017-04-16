@@ -6,7 +6,8 @@ import LeftPage from './left-page';
 import RightPage from './right-page';
 import LeftFooter from './left-footer';
 import RightFooter from './right-footer';
-import { BOOK, VIEW_ALL } from '../constants/routes-constants';
+import SinglePageFooter from './single-page-footer';
+import { BOOK, VIEW_ALL, MY_BOOKS } from '../constants/routes-constants';
 
 class BookPages extends Component {
 
@@ -18,16 +19,20 @@ class BookPages extends Component {
         const {router} = this.context;
         if(router.isActive(`/${VIEW_ALL}`)) {
             this.props.fetchAllBooks();
-        } else if(!(router.isActive(`/${BOOK}/${this.props.bookDetails}`))) {
-            if(!this.props.bookData.length && !this.props.bookdetailsById.title) {
+        } else if((!(router.isActive(`/${BOOK}/${this.props.bookDetails}`))) && (!(router.isActive(`/${MY_BOOKS}`)))) {
+            if(!this.props.bookData.length && !this.props.bookdetailsById.title && !this.props.myBookDetails.length) {
                 this.props.fetchAllBooks();
             }
-        }
+        } 
     }
 
     renderLeftFooter() {
-        if(this.props.bookData.length) {
+        const {bookData, myBookDetails} = this.props;
+        if(bookData.length ) {
             return <LeftFooter /> 
+        }
+        if(myBookDetails.length) {
+            return <SinglePageFooter /> 
         }
     }
 
@@ -65,7 +70,8 @@ class BookPages extends Component {
 function mapStateToProps(state) {
     return {
         bookData: state.book.bookData,
-        bookdetailsById: state.book.bookdetailsById
+        bookdetailsById: state.book.bookdetailsById,
+        myBookDetails: state.book.myBookDetails
     }
 }
 

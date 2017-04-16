@@ -10,7 +10,7 @@ import axios from 'axios';
 import reducers from './reducers';
 import { TEST_AUTH_URI } from './actions/uris';
 import { TOKEN_KEY, TOKEN, AUTHORIZATION, AUTHORIZED } from './constants/content-constants';
-import { IS_USER_AUTHENTICATED, LEFT_AND_RIGHT_PAGE_NUMBER } from './actions/types';
+import { IS_USER_AUTHENTICATED, LEFT_AND_RIGHT_PAGE_NUMBER, MY_BOOKS_PAGE_NUMBER } from './actions/types';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
@@ -35,6 +35,7 @@ if(tokenData) {
 
 function setPageNumbers() {
   store.dispatch({ type:LEFT_AND_RIGHT_PAGE_NUMBER, payload:{left:1, right:2} });
+  store.dispatch({ type:MY_BOOKS_PAGE_NUMBER, payload:1 });
 }
 
 function renderDOM() {

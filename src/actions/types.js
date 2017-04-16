@@ -10,3 +10,7 @@ export const LEFT_AND_RIGHT_PAGE_NUMBER = "left and right page number";
 export const BOOK_DETAILS_BY_ID = "book details by id";
 export const PREVIOUS_LOCATION_PATH = "previous location path";
 export const UPDATE_REQUEST_DETAILS = "update request details";
+export const MY_BOOK_DETAILS = "my book details";
+export const MY_BOOKS_PAGE_NUMBER = "my books page number";
+export const ACTIVE_MY_BOOK_DETAILS = "active my book details";
+export const UPDATE_REQUESTED_STATUS = "update requested status";

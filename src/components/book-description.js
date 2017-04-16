@@ -2,10 +2,29 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class BookDescription extends Component {
+
+    renderBookDescription() {
+        if(this.props.bookdetailsById.description) {
+            return (
+                <div className="book-description-inner-container-info">
+                    {this.props.bookdetailsById.description}
+                </div>
+            )
+        }
+
+        if(this.props.activeMyBookDetails.description) {
+            return (
+                <div className="book-description-inner-container-info">
+                    {this.props.activeMyBookDetails.description}
+                </div>
+            )
+        }
+    }
+
     render() {
         return (
             <div className="book-description-container-info">
-                {this.props.bookdetailsById.description}
+                {this.renderBookDescription()}
             </div>
         );
     }
@@ -13,7 +32,8 @@ class BookDescription extends Component {
 
 function mapStateToProps(state) {
     return {
-        bookdetailsById: state.book.bookdetailsById
+        bookdetailsById: state.book.bookdetailsById,
+        activeMyBookDetails: state.book.activeMyBookDetails
     }
 }
 

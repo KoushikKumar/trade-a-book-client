@@ -6,6 +6,7 @@ import BookImageDetails from './book-image-details';
 import BookDescription from './book-description';
 import RequestButton from './request-book';
 import SellerInfo from './seller-info';
+import BuyersInfo from './buyers-info';
 
 class RightPage extends Component {
 
@@ -14,7 +15,6 @@ class RightPage extends Component {
 	}
 
     renderRightPageContent() {
-
         if(this.props.bookdetailsById && this.props.bookdetailsById.title) {
             return(
                 <div className="book-details-right-page-container">
@@ -27,12 +27,26 @@ class RightPage extends Component {
             );
         }
 
-        if(this.props.bookData) {
+        if(this.props.bookData.length) {
             return (
                 <div className="book-outer-container">
                     {this.renderImages()}
                 </div>
             );
+        }
+
+        if(this.props.activeMyBookDetails && this.props.activeMyBookDetails.title) {
+           return (
+                <div className="book-details-right-page-container">
+                    <div className="book-title" style={{"height":"5vh", "marginTop": "2vh"}}>
+                        { this.props.activeMyBookDetails.title }
+                    </div>
+                    <BookImageDetails />
+                    <BookDescription />
+                    <hr className="horizontal-line-info"/>
+                    <BuyersInfo />
+                </div>
+           ); 
         }
     }
 
@@ -72,7 +86,8 @@ function mapStateToProps(state) {
     return {
         bookData: state.book.bookData,
         rightPageNumber: state.page.rightPageNumber,
-        bookdetailsById: state.book.bookdetailsById
+        bookdetailsById: state.book.bookdetailsById,
+        activeMyBookDetails: state.book.activeMyBookDetails
     }
 }
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { BOOK } from '../constants/routes-constants';
+import { updateActiveMyBookDetails } from '../actions';
 
 class LeftPage extends Component {
 
@@ -10,7 +11,7 @@ class LeftPage extends Component {
 	}
 
     renderLeftPageContent() {
-
+        
         if(this.props.bookdetailsById && this.props.bookdetailsById.title) {
             return (
                 <div className="book-title-and-author-container">
@@ -19,12 +20,21 @@ class LeftPage extends Component {
                 </div>
             );
         }
-        if(this.props.bookData) {
+        
+        if(this.props.bookData.length) {
             return (
                 <div className="book-outer-container">
-                    {this.renderImages()}
+                    {this.renderBookData()}
                 </div>
             );
+        }
+
+        if(this.props.myBookDetails.length) {
+            return (
+                <div className="book-outer-container">
+                    {this.renderMyBooks()}
+                </div>
+            );  
         }
     }
 
@@ -48,21 +58,38 @@ class LeftPage extends Component {
         }
     }
 
-    renderImages() {
+    renderBookData() {
         const { leftPageNumber } = this.props;
         let bookData  = this.props.bookData.slice();
-        if(bookData.length) {
-            const skip = ((leftPageNumber-1) * 9);
-            const limit = 9;
-            const imagesToRender = bookData.splice(skip, limit);
-            return imagesToRender.map((book, counter) => {
-                return (
-                    <div className="book-container" key={counter}>
-                        <img onClick={() => {this.viewBookDetailsPage(book)}} className="book-image" src={book.image}/>
-                    </div>
-                );
-            });
-        }
+        const skip = ((leftPageNumber-1) * 9);
+        const limit = 9;
+        const imagesToRender = bookData.splice(skip, limit);
+        return imagesToRender.map((book, counter) => {
+            return (
+                <div className="book-container" key={counter}>
+                    <img onClick={() => {this.viewBookDetailsPage(book)}} className="book-image" src={book.image}/>
+                </div>
+            );
+        });
+    }
+
+    renderMyBooks() {
+        const { myBooksPageNumber } = this.props;
+        let myBookDetails = this.props.myBookDetails.slice();
+        const skip = ((myBooksPageNumber-1) * 9);
+        const limit = 9;
+        const imagesToRender = myBookDetails.splice(skip, limit);
+        return imagesToRender.map((book, counter) => {
+            return (
+                <div className="book-container" key={counter}>
+                    <img onClick={() => this.updateActiveMyBookDetails(book)} className="book-image" src={book.image}/>
+                </div>
+            );
+        });
+    }
+
+    updateActiveMyBookDetails(book) {
+        this.props.updateActiveMyBookDetails(book);
     }
 
     viewBookDetailsPage(book) {
@@ -84,8 +111,10 @@ function mapStateToProps(state) {
     return {
         bookData: state.book.bookData,
         leftPageNumber: state.page.leftPageNumber,
-        bookdetailsById: state.book.bookdetailsById
+        bookdetailsById: state.book.bookdetailsById,
+        myBookDetails: state.book.myBookDetails,
+        myBooksPageNumber: state.page.myBooksPageNumber
     }
 }
 
-export default connect(mapStateToProps)(LeftPage)
+export default connect(mapStateToProps, { updateActiveMyBookDetails })(LeftPage)

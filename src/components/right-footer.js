@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { setPageNumbers } from '../actions';
+import { NEXT } from '../constants/content-constants';
 
 class RightFooter extends Component {
 
@@ -15,7 +16,7 @@ class RightFooter extends Component {
         if(bookData.length > 9 * rightPageNumber) {
             return (
                 <div onClick={()=>this.setPageNumbers()} className="next-page">
-                    Next
+                    { NEXT }
                 </div>
             );
         }

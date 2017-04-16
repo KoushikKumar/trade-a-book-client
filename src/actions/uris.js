@@ -6,3 +6,5 @@ export const UPDATE_PROFILE_URI = "https://trade-a-book-server-koushikkumarv.c9u
 export const FETCH_ALL_BOOK_DATA = "https://api.myjson.com/bins/os1zn"; //TO DO:  update with real uri  
 export const FETCH_BOOK_DETAILS_BY_ID = "https://api.myjson.com/bins/pwclv"; //TO DO:  update with real uri 
 export const REQUEST_BOOK_URI = "https://api.myjson.com/bins/117l3n"; // TO DO: update this
+export const GET_MY_BOOK_DETAILS_URI = "https://api.myjson.com/bins/tcwhb";//TO DO : Update this
+export const UPDATE_REQUESTED_STATUS_URI = "";//TO DO : update this 

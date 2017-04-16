@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { setPageNumbers } from '../actions';
+import { PREVIOUS } from '../constants/content-constants';
 
 class LeftFooter extends Component {
 
@@ -14,7 +15,7 @@ class LeftFooter extends Component {
         if(this.props.leftPageNumber > 1) {
             return (
                 <div onClick={()=>this.setPageNumbers()} className="previous-page">
-                    Previous
+                    { PREVIOUS }
                 </div>
             );
         }

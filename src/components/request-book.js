@@ -47,7 +47,7 @@ class RequestButton extends Component {
     renderStatusButton() {
         const { bookdetailsById } = this.props;
         const { userName } = this.props.userData;
-        if((!this.props.isUserAuthenticated) || (!bookdetailsById.buyersInfo[userName])) {
+        if((!this.props.isUserAuthenticated) || !bookdetailsById.buyersInfo || !bookdetailsById.buyersInfo[userName]) {
             return (
                 <button onClick = {() => this.requestBook()} type="button" className="request-button-info">{REQUEST}</button>
             );
