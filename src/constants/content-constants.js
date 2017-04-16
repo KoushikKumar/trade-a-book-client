@@ -22,3 +22,4 @@ export const REQUEST_REJECTED  = "Request Rejected";
 export const STATUS = "status";
 export const NEXT = "Next";
 export const PREVIOUS = "Previous";
+export const ADD = "Add";

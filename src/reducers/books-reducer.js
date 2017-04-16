@@ -3,7 +3,8 @@ import { ALL_BOOK_DATA,
          UPDATE_REQUEST_DETAILS, 
          MY_BOOK_DETAILS, 
          ACTIVE_MY_BOOK_DETAILS,
-         UPDATE_REQUESTED_STATUS } from '../actions/types';
+         UPDATE_REQUESTED_STATUS,
+         ADD_BOOK } from '../actions/types';
 import { REQUEST_PENDING } from '../constants/content-constants';
 
 export default function(state={bookData:[], bookdetailsById:{}, myBookDetails:[], activeMyBookDetails:{}}, action) {
@@ -36,8 +37,9 @@ export default function(state={bookData:[], bookdetailsById:{}, myBookDetails:[]
                 }
                 return book;
             })
-
             return {...state, activeMyBookDetails, myBookDetails, bookData:[], bookdetailsById:{}}
+        case ADD_BOOK:
+            return state;
     }
     return state;
 }

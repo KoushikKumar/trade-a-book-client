@@ -13,7 +13,8 @@ import { SIGN_UP_CLICKED,
          MY_BOOK_DETAILS,
          MY_BOOKS_PAGE_NUMBER,
          ACTIVE_MY_BOOK_DETAILS,
-         UPDATE_REQUESTED_STATUS } from './types';
+         UPDATE_REQUESTED_STATUS,
+         ADD_BOOK } from './types';
 
 import axios from 'axios';
 import { browserHistory } from 'react-router';
@@ -25,8 +26,10 @@ import { SIGN_UP_URI,
          FETCH_BOOK_DETAILS_BY_ID,
          REQUEST_BOOK_URI,
          GET_MY_BOOK_DETAILS_URI,
-         UPDATE_REQUESTED_STATUS_URI } from './uris';
+         UPDATE_REQUESTED_STATUS_URI,
+         ADD_BOOK_URI } from './uris';
 import { TOKEN_KEY, UNAUTHORIZED, AUTHORIZATION, TOKEN } from '../constants/content-constants';
+import { MY_BOOKS } from '../constants/routes-constants';
 
 export function signUpClicked(payload) {
     return {
@@ -185,7 +188,7 @@ export function requestBook(userName, address, bookId) {
 
 export function fetchMyBookDetails() {
     const userData = JSON.parse(localStorage.getItem(TOKEN_KEY));
-    const { userName } = userData.userName.toLowerCase();
+    const userName = userData.userName.toLowerCase();
     return function(dispatch) {
         axios.get("https://api.myjson.com/bins/tcwhb")  //TODO :: use `${GET_MY_BOOK_DETAILS_URI}/${userName}`
             .then(response => {
@@ -209,7 +212,7 @@ export function updateActiveMyBookDetails(payload) {
 export function updateRequestedStatus(status, bookId, buyerName) {
     //TO DO as below
     // const userData = JSON.parse(localStorage.getItem(TOKEN_KEY));
-    // const { userName } = userData.userName.toLowerCase();
+    // const userName = userData.userName.toLowerCase();
     // return function(dispatch) {
     //     axios.post(UPDATE_REQUESTED_STATUS_URI, {status, bookId, buyerName, userName})
     //         .then(response => {
@@ -234,4 +237,26 @@ export function updateRequestedStatus(status, bookId, buyerName) {
             buyerName
         }
     }
+} 
+
+export function addBook(book) {
+    const userData = JSON.parse(localStorage.getItem(TOKEN_KEY));
+    const userName = userData.userName.toLowerCase();
+    const { address } = userData;
+    book.sellerInfo["name"] = userName;
+    book.sellerInfo["address"] = address;
+    //TODO as below
+    // return function(dispatch) {
+    //     axios.post(ADD_BOOK_URI, book)
+    //         .then(response => {
+    //             browserHistory.push(`/${MY_BOOKS}`);
+                //    dispatch(
+                //        {
+                //            type:ADD_BOOK
+                //        }
+                //    )  
+    //         })
+    // }
+    browserHistory.push(`/${MY_BOOKS}`);
+    return { type:ADD_BOOK }
 } 

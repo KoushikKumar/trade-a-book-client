@@ -14,3 +14,4 @@ export const MY_BOOK_DETAILS = "my book details";
 export const MY_BOOKS_PAGE_NUMBER = "my books page number";
 export const ACTIVE_MY_BOOK_DETAILS = "active my book details";
 export const UPDATE_REQUESTED_STATUS = "update requested status";
+export const ADD_BOOK = "add book";

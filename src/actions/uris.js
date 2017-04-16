@@ -8,3 +8,4 @@ export const FETCH_BOOK_DETAILS_BY_ID = "https://api.myjson.com/bins/pwclv"; //T
 export const REQUEST_BOOK_URI = "https://api.myjson.com/bins/117l3n"; // TO DO: update this
 export const GET_MY_BOOK_DETAILS_URI = "https://api.myjson.com/bins/tcwhb";//TO DO : Update this
 export const UPDATE_REQUESTED_STATUS_URI = "";//TO DO : update this 
+export const ADD_BOOK_URI = "";//TO DO : update this 

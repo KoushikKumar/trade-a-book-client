@@ -473,6 +473,42 @@ body {
     background-color: #fb6969;
 }
 
+.add-book-input-form-container {
+    width: 90%;
+    height: 80vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 3vh;
+}
+
+.add-book-input-form {
+    width: 100%;
+}
+
+.add-book-input-form textarea {
+    overflow: auto;
+    resize: none;
+}
+
+.add-book-input-form-submit-container {
+    width: 30%;
+    height: 4.5vh;
+    
+}
+
+.add-book-input-form-submit {
+    width: 100%;
+    background-color: #D9534F;
+    border: 1px solid #D9534F;
+    height: 4.5vh;
+    color: white;
+}
+
+.add-book-input-form-submit:hover {
+    background-color: #af4b4b;
+}
+
 .iphone-container {
     width: 20%;
     height: 75vh;
@@ -648,6 +684,15 @@ body {
 .profile-update-form-error-message {
     color: red;
     font-size: 2vh;
+}
+
+.add-book-form-error-message {
+    color: red;
+    font-size: 2vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: -6vh;
 }
 
 .iphone-screen-buttons-container {
