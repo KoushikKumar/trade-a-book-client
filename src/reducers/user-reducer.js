@@ -5,8 +5,11 @@ export default function(state={ isUserAuthenticated:false,
                                 loginErrorMessage:"",
                                 userData:{} }, action) {
     switch(action.type) {
-        case IS_USER_AUTHENTICATED : 
-            return {...state, isUserAuthenticated:action.payload};
+        case IS_USER_AUTHENTICATED :
+            if(action.payload) {
+                return {...state, isUserAuthenticated:action.payload};
+            } 
+            return {...state, isUserAuthenticated:action.payload, userData:{}};
         case SIGN_UP_ERROR :
             return {...state, signupErrorMessage:action.payload};
         case LOG_IN_ERROR :

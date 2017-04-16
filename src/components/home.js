@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 
-import Iphone from './iphone';
-import Book from './book';
+import { VIEW_ALL } from '../constants/routes-constants';
 
 export default class Home extends Component {
+
+    static contextTypes = {
+			router: React.PropTypes.object
+	}
+
+    componentWillMount() {
+        this.context.router.push(`/${VIEW_ALL}`);
+    }
+
     render() {
-        return (
-            <div className="outer-container">
-                <Book />
-                <Iphone />
-            </div>
-        );
+        return false;
     }
 }

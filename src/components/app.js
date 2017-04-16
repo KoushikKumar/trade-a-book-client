@@ -1,6 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export default class App extends Component {
+import { setPreviousLocationPath } from '../actions';
+
+class App extends Component {
+
+  componentWillReceiveProps(nextProps) {
+    const nextLocationPath = nextProps.location.pathname;
+    const previousLocationPath = this.props.location.pathname;
+    if(nextLocationPath !== previousLocationPath) {
+      this.props.setPreviousLocationPath(previousLocationPath);
+    }
+  }
+
   render() {
     return (
       <div>
@@ -9,3 +21,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default connect(null, { setPreviousLocationPath })(App)

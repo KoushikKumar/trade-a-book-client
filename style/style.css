@@ -287,11 +287,12 @@ body {
     height: 5vh;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .request-button-info {
     height: 5vh;
-    width: 30%;
+    min-width: 30%;
     background-color: #D9534F;
     border: 1px solid #D9534F;
     cursor: pointer;
@@ -300,8 +301,31 @@ body {
     font-size: 1.3vw;
 }
 
+.request-status-button-info {
+    height: 5vh;
+    min-width: 30%;
+    background-color: #D9534F;
+    border: 1px solid #D9534F;
+    cursor: default;
+    color: white;
+    font-family : Iskoola Pota;
+    font-size: 1.3vw;
+}
+
+.request-status-button-info:focus {
+    outline: none;
+}
+
 .request-button-info:hover {
     background-color: #af4b4b;
+}
+
+.request-book-error-message {
+    color: red;
+    font-size: 2vh;
+    width:90%;
+    display: flex;
+    justify-content: center;
 }
 
 .horizontal-line-info {

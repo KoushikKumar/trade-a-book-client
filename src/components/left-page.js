@@ -10,20 +10,22 @@ class LeftPage extends Component {
 	}
 
     renderLeftPageContent() {
-        const {router} = this.context;
-        if(router.isActive(`/${BOOK}/${this.props.bookDetails}`)) {
-            return(
+
+        if(this.props.bookdetailsById && this.props.bookdetailsById.title) {
+            return (
                 <div className="book-title-and-author-container">
                     {this.renderTitle()}
                     {this.renderAuthor()}
                 </div>
-            );   
+            );
         }
-        return (
-            <div className="book-outer-container">
-                {this.renderImages()}
-            </div>
-        );
+        if(this.props.bookData) {
+            return (
+                <div className="book-outer-container">
+                    {this.renderImages()}
+                </div>
+            );
+        }
     }
 
     renderTitle() {

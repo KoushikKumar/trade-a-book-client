@@ -66,7 +66,7 @@ class LoginForm extends Component {
     submitData() {
         if(this.state.isDataValid) {
             const { userName, password } = this.state;
-            this.props.submitLoginData(userName, password);
+            this.props.submitLoginData(userName, password, this.props.previousLocationPath);
         }
     }
 
@@ -99,7 +99,8 @@ class LoginForm extends Component {
 function mapStateToProps(state) {
     return {
         isLoginButtonClicked: state.buttonsClick.isLoginButtonClicked,
-        loginErrorMessage: state.user.loginErrorMessage
+        loginErrorMessage: state.user.loginErrorMessage,
+        previousLocationPath: state.routeLocation.previousLocationPath
     }
 }
 

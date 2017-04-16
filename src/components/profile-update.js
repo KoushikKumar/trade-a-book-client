@@ -73,7 +73,7 @@ class Profile extends Component {
     updateData() {
         if(this.state.isDataValid) {
             const { userName, address } = this.state;
-            this.props.updateProfile(userName, address)
+            this.props.updateProfile(userName, address, this.props.previousLocationPath)
         }
     }
 
@@ -103,7 +103,8 @@ class Profile extends Component {
 function mapStateToProps(state) {
     return {
         userData: state.user.userData,
-        isUpdateProfileButtonClicked: state.buttonsClick.isUpdateProfileButtonClicked
+        isUpdateProfileButtonClicked: state.buttonsClick.isUpdateProfileButtonClicked,
+        previousLocationPath: state.routeLocation.previousLocationPath
     }
 }
 

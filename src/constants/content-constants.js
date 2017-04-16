@@ -15,3 +15,6 @@ export const CANCEL = "Cancel";
 export const READ_ONLY = "readOnly";
 export const REQUEST = "Request";
 export const SELLER_INFO = "Seller Information";
+export const REQUEST_BOOK_ERROR_MESSAGE = "Login to request this book";
+export const REQUEST_PENDING = "Request Pending";
+export const STATUS = "status";

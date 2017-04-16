@@ -14,8 +14,8 @@ class RightPage extends Component {
 	}
 
     renderRightPageContent() {
-        const {router} = this.context;
-        if(router.isActive(`/${BOOK}/${this.props.bookDetails}`)) {
+
+        if(this.props.bookdetailsById && this.props.bookdetailsById.title) {
             return(
                 <div className="book-details-right-page-container">
                     <BookImageDetails />
@@ -24,13 +24,16 @@ class RightPage extends Component {
                     <hr className="horizontal-line-info"/>
                     <SellerInfo />
                 </div>
-            );   
+            );
         }
-        return (
-            <div className="book-outer-container">
-                {this.renderImages()}
-            </div>
-        );
+
+        if(this.props.bookData) {
+            return (
+                <div className="book-outer-container">
+                    {this.renderImages()}
+                </div>
+            );
+        }
     }
 
     renderImages() {
@@ -68,7 +71,8 @@ class RightPage extends Component {
 function mapStateToProps(state) {
     return {
         bookData: state.book.bookData,
-        rightPageNumber: state.page.rightPageNumber
+        rightPageNumber: state.page.rightPageNumber,
+        bookdetailsById: state.book.bookdetailsById
     }
 }
 

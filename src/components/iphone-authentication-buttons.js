@@ -52,7 +52,7 @@ class IphoneAuthenticationButtons extends Component {
                     <div onClick={()=>{this.updateProfileClicked()}} className = "left-button brand-buttons" >
                         { UPDATE }
                     </div>
-                    <Link className = "right-button brand-buttons" to = "/" >
+                    <Link className = "right-button brand-buttons" to = {this.props.previousLocationPath} >
                         { CANCEL }
                     </Link> 
                 </div>
@@ -111,7 +111,8 @@ class IphoneAuthenticationButtons extends Component {
 
 function mapStateToProps(state) {
     return {
-        isUserAuthenticated: state.user.isUserAuthenticated
+        isUserAuthenticated: state.user.isUserAuthenticated,
+        previousLocationPath: state.routeLocation.previousLocationPath
     };
 }
 

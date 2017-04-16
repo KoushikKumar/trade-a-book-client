@@ -7,12 +7,19 @@ import { SIGN_UP_CLICKED,
          UPDATE_PROFILE_CLICKED,
          ALL_BOOK_DATA,
          LEFT_AND_RIGHT_PAGE_NUMBER,
-         BOOK_DETAILS_BY_ID } from './types';
+         BOOK_DETAILS_BY_ID,
+         PREVIOUS_LOCATION_PATH,
+         UPDATE_REQUEST_DETAILS } from './types';
 
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 
-import { SIGN_UP_URI, LOG_IN_URI, UPDATE_PROFILE_URI, FETCH_ALL_BOOK_DATA, FETCH_BOOK_DETAILS_BY_ID } from './uris';
+import { SIGN_UP_URI, 
+         LOG_IN_URI, 
+         UPDATE_PROFILE_URI, 
+         FETCH_ALL_BOOK_DATA, 
+         FETCH_BOOK_DETAILS_BY_ID,
+         REQUEST_BOOK_URI } from './uris';
 import { TOKEN_KEY, UNAUTHORIZED, AUTHORIZATION, TOKEN } from '../constants/content-constants';
 
 export function signUpClicked(payload) {
@@ -36,14 +43,14 @@ export function updateProfileClicked(payload) {
     }
 }
 
-export function submitSignupData(userName, password, address) {
+export function submitSignupData(userName, password, address, previousLocationPath) {
     const user = {userName, password, address};
     return function(dispatch) {
         axios.post(SIGN_UP_URI, user)
             .then(response => {
                 localStorage.setItem(TOKEN_KEY,JSON.stringify(response.data));
+                browserHistory.push(previousLocationPath);
                 dispatch ({ type:IS_USER_AUTHENTICATED, payload:true });
-                browserHistory.push('/');
             })
             .catch((e) => {
                 dispatch({ type:SIGN_UP_ERROR, payload:e.response.data.error })
@@ -51,14 +58,15 @@ export function submitSignupData(userName, password, address) {
     }
 }
 
-export function submitLoginData(userName, password) {
+export function submitLoginData(userName, password, previousLocationPath) {
     const user = {userName, password};
     return function(dispatch) {
         axios.post(LOG_IN_URI, user)
             .then(response => {
                 localStorage.setItem(TOKEN_KEY,JSON.stringify(response.data));
+                browserHistory.push(previousLocationPath);
                 dispatch ({ type:IS_USER_AUTHENTICATED, payload:true });
-                browserHistory.push('/');
+                
             })
             .catch((e) => {
                 if(e.response.data === UNAUTHORIZED) {
@@ -68,7 +76,7 @@ export function submitLoginData(userName, password) {
     }
 }
 
-export function updateProfile(userName, address) {
+export function updateProfile(userName, address, previousLocationPath) {
     const user = {userName, address};
     const tokenData = JSON.parse(localStorage.getItem(TOKEN_KEY));
     return function(dispatch) { 
@@ -76,7 +84,7 @@ export function updateProfile(userName, address) {
             .then(response => {
                 tokenData.address = address;
                 localStorage.setItem(TOKEN_KEY,JSON.stringify(tokenData));
-                browserHistory.push('/');
+                browserHistory.push(previousLocationPath);
             })
             .catch(() => {
 
@@ -136,5 +144,31 @@ export function fetchBookDetails(bookId) {
                     "payload":response.data
                 });
             })
+    }
+}
+
+export function setPreviousLocationPath(path) {
+    return {
+        type: PREVIOUS_LOCATION_PATH,
+        payload: path
+    }
+}
+
+export function requestBook(userName, address, bookId) {
+    //TO DO as below
+    // return function(dispatch) {
+    //     axios.post(REQUEST_BOOK_URI, {userName, address, bookId})
+    //         .then(response => {
+    //             dispatch(
+    //                 {
+    //                     type: UPDATE_REQUEST_DETAILS,
+    //                     payload: {userName, address}
+    //                 }
+    //             )
+    //         })
+    // }
+    return {
+        type: UPDATE_REQUEST_DETAILS,
+        payload: {userName, address}
     }
 }

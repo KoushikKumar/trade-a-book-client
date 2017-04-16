@@ -72,7 +72,7 @@ class Signup extends Component {
     submitData() {
         if(this.state.isDataValid) {
             const { userName, password1, address } = this.state;
-            this.props.submitSignupData(userName, password1, address);
+            this.props.submitSignupData(userName, password1, address, this.props.previousLocationPath);
         }
     }
 
@@ -101,7 +101,8 @@ class Signup extends Component {
 function mapStateToProps(state) {
     return {
         isSignUpButtonClicked: state.buttonsClick.isSignUpButtonClicked,
-        signupErrorMessage: state.user.signupErrorMessage
+        signupErrorMessage: state.user.signupErrorMessage,
+        previousLocationPath: state.routeLocation.previousLocationPath
     }
 }
 
