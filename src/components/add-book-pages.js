@@ -108,11 +108,6 @@ class AddBookPages extends Component {
                               onChange = {(e) => {this.setInputState(e, "description")}}>
                     </textarea>
                 </div>
-                <div className="add-book-input-form-submit-container">
-                    <button onClick={() => this.submitData()} className="add-book-input-form-submit" type="button">
-                        { ADD }
-                    </button>
-                </div>
             </div>
         );
     }
@@ -208,6 +203,16 @@ class AddBookPages extends Component {
         }
     }
 
+    renderAddButton() {
+       return (
+            <div className="add-book-input-form-submit-container">
+                <button onClick={() => this.submitData()} className="add-book-input-form-submit" type="button">
+                    { ADD }
+                </button>
+            </div>
+       )
+    }
+
     render() {
         return (
             <div className="book-cover">
@@ -229,6 +234,7 @@ class AddBookPages extends Component {
                             {this.renderBookTitle()}
                             {this.renderBookImageDetails()}
                             {this.renderDescription()}
+                            {this.renderAddButton()}
                         </div>
                     </div>
                 </div>

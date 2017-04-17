@@ -150,7 +150,7 @@ export function setSinglePageFooterPageNumber(payload) {
 
 export function fetchBookDetails(bookId) {
     return function(dispatch) {
-        axios.get(FETCH_BOOK_DETAILS_BY_ID)
+        axios.get(`${FETCH_BOOK_DETAILS_BY_ID}/${bookId}`)
             .then(response => {
                 dispatch({
                     "type":BOOK_DETAILS_BY_ID,
@@ -168,21 +168,17 @@ export function setPreviousLocationPath(path) {
 }
 
 export function requestBook(userName, address, bookId) {
-    //TO DO as below
-    // return function(dispatch) {
-    //     axios.post(REQUEST_BOOK_URI, {userName, address, bookId})
-    //         .then(response => {
-    //             dispatch(
-    //                 {
-    //                     type: UPDATE_REQUEST_DETAILS,
-    //                     payload: {userName, address}
-    //                 }
-    //             )
-    //         })
-    // }
-    return {
-        type: UPDATE_REQUEST_DETAILS,
-        payload: {userName, address}
+    const userData = JSON.parse(localStorage.getItem(TOKEN_KEY));
+    return function(dispatch) {
+        axios.post(`${REQUEST_BOOK_URI}?${AUTHORIZATION}=${userData[TOKEN]}`, {userName, address, bookId})
+            .then(response => {
+                dispatch(
+                    {
+                        type: UPDATE_REQUEST_DETAILS,
+                        payload: {userName, address}
+                    }
+                )
+            })
     }
 }
 
@@ -190,7 +186,7 @@ export function fetchMyBookDetails() {
     const userData = JSON.parse(localStorage.getItem(TOKEN_KEY));
     const userName = userData.userName.toLowerCase();
     return function(dispatch) {
-        axios.get("https://api.myjson.com/bins/tcwhb")  //TODO :: use `${GET_MY_BOOK_DETAILS_URI}/${userName}`
+        axios.get(`${GET_MY_BOOK_DETAILS_URI}/${userName}?${AUTHORIZATION}=${userData[TOKEN]}`) 
             .then(response => {
                 dispatch(
                     {
@@ -210,32 +206,22 @@ export function updateActiveMyBookDetails(payload) {
 }
 
 export function updateRequestedStatus(status, bookId, buyerName) {
-    //TO DO as below
-    // const userData = JSON.parse(localStorage.getItem(TOKEN_KEY));
-    // const userName = userData.userName.toLowerCase();
-    // return function(dispatch) {
-    //     axios.post(UPDATE_REQUESTED_STATUS_URI, {status, bookId, buyerName, userName})
-    //         .then(response => {
-    //             dispatch(
-    //                 {
-    //                     type: UPDATE_REQUESTED_STATUS,
-    //                     payload: {
-    //                         status,
-    //                         bookId,
-                            //    buyerName
-    //                     }
-    //                 }
-    //             )
-    //         }
-    //     )
-    // }
-    return {
-        type: UPDATE_REQUESTED_STATUS,
-        payload: {
-            status,
-            bookId,
-            buyerName
-        }
+    const userData = JSON.parse(localStorage.getItem(TOKEN_KEY));
+    return function(dispatch) {
+        axios.post(`${UPDATE_REQUESTED_STATUS_URI}?${AUTHORIZATION}=${userData[TOKEN]}`, {status, bookId, buyerName})
+            .then(response => {
+                dispatch(
+                    {
+                        type: UPDATE_REQUESTED_STATUS,
+                        payload: {
+                            status,
+                            bookId,
+                            buyerName
+                        }
+                    }
+                )
+            }
+        )
     }
 } 
 
@@ -245,18 +231,16 @@ export function addBook(book) {
     const { address } = userData;
     book.sellerInfo["name"] = userName;
     book.sellerInfo["address"] = address;
-    //TODO as below
-    // return function(dispatch) {
-    //     axios.post(ADD_BOOK_URI, book)
-    //         .then(response => {
-    //             browserHistory.push(`/${MY_BOOKS}`);
-                //    dispatch(
-                //        {
-                //            type:ADD_BOOK
-                //        }
-                //    )  
-    //         })
-    // }
-    browserHistory.push(`/${MY_BOOKS}`);
-    return { type:ADD_BOOK }
+
+    return function(dispatch) {
+        axios.post(`${ADD_BOOK_URI}?${AUTHORIZATION}=${userData[TOKEN]}`, book)
+            .then(response => {
+                browserHistory.push(`/${MY_BOOKS}`);
+                   dispatch(
+                       {
+                           type:ADD_BOOK
+                       }
+                   )  
+            })
+    }
 } 
