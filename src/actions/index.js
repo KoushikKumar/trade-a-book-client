@@ -205,7 +205,7 @@ export function updateActiveMyBookDetails(payload) {
     }
 }
 
-export function updateRequestedStatus(status, bookId, buyerName) {
+export function updateRequestedStatus(status, bookId, buyerName, whichBook) {
     const userData = JSON.parse(localStorage.getItem(TOKEN_KEY));
     return function(dispatch) {
         axios.post(`${UPDATE_REQUESTED_STATUS_URI}?${AUTHORIZATION}=${userData[TOKEN]}`, {status, bookId, buyerName})
@@ -214,6 +214,7 @@ export function updateRequestedStatus(status, bookId, buyerName) {
                     {
                         type: UPDATE_REQUESTED_STATUS,
                         payload: {
+                            whichBook,
                             status,
                             bookId,
                             buyerName

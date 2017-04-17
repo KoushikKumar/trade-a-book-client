@@ -23,3 +23,5 @@ export const STATUS = "status";
 export const NEXT = "Next";
 export const PREVIOUS = "Previous";
 export const ADD = "Add";
+export const ACTIVE_MY_BOOK_DETAILS_CONSTANT = "activeMyBookDetails";
+export const BOOK_DETAILS_BY_ID_CONSTANT = "bookdetailsById"; 

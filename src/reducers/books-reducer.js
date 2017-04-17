@@ -5,7 +5,7 @@ import { ALL_BOOK_DATA,
          ACTIVE_MY_BOOK_DETAILS,
          UPDATE_REQUESTED_STATUS,
          ADD_BOOK } from '../actions/types';
-import { REQUEST_PENDING } from '../constants/content-constants';
+import { REQUEST_PENDING, ACTIVE_MY_BOOK_DETAILS_CONSTANT, BOOK_DETAILS_BY_ID_CONSTANT } from '../constants/content-constants';
 
 export default function(state={bookData:[], bookdetailsById:{}, myBookDetails:[], activeMyBookDetails:{}}, action) {
     switch(action.type) {
@@ -27,17 +27,25 @@ export default function(state={bookData:[], bookdetailsById:{}, myBookDetails:[]
         case ACTIVE_MY_BOOK_DETAILS:
             return {...state, activeMyBookDetails: action.payload, bookData:[], bookdetailsById:{}}
         case UPDATE_REQUESTED_STATUS:
-            const {status, bookId, buyerName} = action.payload;
-            let activeMyBookDetails = JSON.parse(JSON.stringify(state.activeMyBookDetails));
-            activeMyBookDetails["buyersInfo"][buyerName]["status"] = status; 
+            const {whichBook, status, bookId, buyerName} = action.payload;
+            if(whichBook === ACTIVE_MY_BOOK_DETAILS_CONSTANT) {
+                let activeMyBookDetails = JSON.parse(JSON.stringify(state.activeMyBookDetails));
+                activeMyBookDetails["buyersInfo"][buyerName]["status"] = status; 
 
-            let myBookDetails = state.myBookDetails.map((book) => {
-                if(book._id === bookId) {
-                    book["buyersInfo"][buyerName]["status"] = status; 
-                }
-                return book;
-            })
-            return {...state, activeMyBookDetails, myBookDetails, bookData:[], bookdetailsById:{}}
+                let myBookDetails = state.myBookDetails.map((book) => {
+                    if(book._id === bookId) {
+                        book["buyersInfo"][buyerName]["status"] = status; 
+                    }
+                    return book;
+                })
+                return {...state, activeMyBookDetails, myBookDetails, bookData:[], bookdetailsById:{}}
+            }
+            if(whichBook === BOOK_DETAILS_BY_ID_CONSTANT) {
+                let bookdetailsById = JSON.parse(JSON.stringify(state.bookdetailsById));
+                bookdetailsById["buyersInfo"][buyerName]["status"] = status;
+                return {...state, bookdetailsById, bookData:[], myBookDetails:[], activeMyBookDetails:{}}
+            }
+            
         case ADD_BOOK:
             return state;
     }

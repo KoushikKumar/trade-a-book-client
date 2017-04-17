@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { REQUEST_PENDING, REQUEST_ACCEPTED, REQUEST_REJECTED } from '../constants/content-constants';
+import { REQUEST_PENDING, 
+         REQUEST_ACCEPTED, 
+         REQUEST_REJECTED, 
+         ACTIVE_MY_BOOK_DETAILS_CONSTANT,
+         BOOK_DETAILS_BY_ID_CONSTANT } from '../constants/content-constants';
 import { updateRequestedStatus } from '../actions';
 
 class BuyersInfo extends Component {
@@ -16,12 +20,16 @@ class BuyersInfo extends Component {
 
     renderBuyerDetails() {
         let bookDetails = {};
+        let whichBook = "";
         const activeMyBookDetails = this.props.activeMyBookDetails;
         const bookdetailsById = this.props.bookdetailsById;
+
         if(activeMyBookDetails && activeMyBookDetails.buyersInfo) {
             bookDetails = activeMyBookDetails;
+            whichBook = ACTIVE_MY_BOOK_DETAILS_CONSTANT;
         } else if(bookdetailsById && bookdetailsById.buyersInfo) {
             bookDetails = bookdetailsById;
+            whichBook = BOOK_DETAILS_BY_ID_CONSTANT;
         }
 
         if(bookDetails && bookDetails.buyersInfo) {
@@ -44,14 +52,14 @@ class BuyersInfo extends Component {
                                 {value.address}
                             </div>
                         </div>
-                        {this.renderRequestStatus(value.status, key, bookDetails)}
+                        {this.renderRequestStatus(value.status, key, bookDetails, whichBook)}
                     </div>
                 ); 
             });
         }
     }
 
-    renderRequestStatus(status, buyerName, bookDetails) {
+    renderRequestStatus(status, buyerName, bookDetails, whichBook) {
         const updateStyleOfAcceptedButton = {};
         const updateStyleOfRejectedButton = {};
         if(status === REQUEST_ACCEPTED) {
@@ -61,21 +69,21 @@ class BuyersInfo extends Component {
         }
         return (
             <div className="request-status">
-                <div onClick={() => this.updateRequestedStatus(status, REQUEST_ACCEPTED, buyerName, bookDetails)} className="request-accept" style={updateStyleOfAcceptedButton}>
+                <div onClick={() => this.updateRequestedStatus(status, REQUEST_ACCEPTED, buyerName, bookDetails, whichBook)} className="request-accept" style={updateStyleOfAcceptedButton}>
                     <i className="fa fa-check" aria-hidden="true"></i>
                 </div>
-                <div onClick={() => this.updateRequestedStatus(status, REQUEST_REJECTED, buyerName, bookDetails)} className="request-reject" style={updateStyleOfRejectedButton}>
+                <div onClick={() => this.updateRequestedStatus(status, REQUEST_REJECTED, buyerName, bookDetails, whichBook)} className="request-reject" style={updateStyleOfRejectedButton}>
                     <i className="fa fa-times" aria-hidden="true"></i>
                 </div>
             </div>
         )
     }
 
-    updateRequestedStatus(currentStatus, updatedStatus, buyerName, bookDetails) {
+    updateRequestedStatus(currentStatus, updatedStatus, buyerName, bookDetails, whichBook) {
         if(currentStatus === updatedStatus) {
-            this.props.updateRequestedStatus(REQUEST_PENDING, bookDetails._id, buyerName);
+            this.props.updateRequestedStatus(REQUEST_PENDING, bookDetails._id, buyerName, whichBook);
         } else {
-            this.props.updateRequestedStatus(updatedStatus, bookDetails._id, buyerName);
+            this.props.updateRequestedStatus(updatedStatus, bookDetails._id, buyerName, whichBook);
         }
     }
 
