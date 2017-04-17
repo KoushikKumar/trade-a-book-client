@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { REQUEST } from '../constants/content-constants';
-import { REQUEST_BOOK_ERROR_MESSAGE, STATUS } from '../constants/content-constants';
+import { REQUEST_BOOK_ERROR_MESSAGE, STATUS, REQUEST_PENDING, REQUEST_ACCEPTED, REQUEST_REJECTED } from '../constants/content-constants';
 import { fetchUserData, requestBook } from '../actions';
 
 class RequestButton extends Component {
@@ -52,8 +52,23 @@ class RequestButton extends Component {
                 <button onClick = {() => this.requestBook()} type="button" className="request-button-info">{REQUEST}</button>
             );
         } else {
+            const status = bookdetailsById.buyersInfo[userName][STATUS];
+            const updateBackgroundColor = {};
+            if(status === REQUEST_PENDING) {
+                updateBackgroundColor["backgroundColor"] = "#DD7B2A";
+                updateBackgroundColor["border"] = "1px solid #DD7B2A";
+            }
+            if(status === REQUEST_ACCEPTED) {
+                updateBackgroundColor["backgroundColor"] = "#6EBE4D";
+                updateBackgroundColor["border"] = "1px solid #6EBE4D";
+            }
+            if(status === REQUEST_REJECTED) {
+                updateBackgroundColor["backgroundColor"] = "#A21D21";
+                updateBackgroundColor["border"] = "1px solid #A21D21";
+            }
+
             return (
-                <button type="button" className="request-status-button-info">{bookdetailsById.buyersInfo[userName][STATUS]}</button>
+                <button type="button" className="request-status-button-info" style={updateBackgroundColor}>{status}</button>
             );
         }
     }
