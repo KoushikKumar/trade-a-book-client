@@ -25,6 +25,14 @@ class BuyersInfo extends Component {
         }
 
         if(bookDetails && bookDetails.buyersInfo) {
+            if(!Object.entries(bookDetails.buyersInfo).length){
+                return (
+                    <div className="buyer-information-status">
+                        No one has requested this book yet
+                    </div>
+                )
+            }
+
             return Object.entries(bookDetails.buyersInfo).map(([key, value], index) => {
                 return(
                     <div className="buyer" key={index}>

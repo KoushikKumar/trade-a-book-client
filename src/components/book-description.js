@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 class BookDescription extends Component {
 
     renderBookDescription() {
-        if(this.props.bookdetailsById.description) {
+        if(this.props.bookdetailsById && this.props.bookdetailsById.description) {
             return (
                 <div className="book-description-inner-container-info">
                     {this.props.bookdetailsById.description}
@@ -12,7 +12,7 @@ class BookDescription extends Component {
             )
         }
 
-        if(this.props.activeMyBookDetails.description) {
+        if(this.props.activeMyBookDetails && this.props.activeMyBookDetails.description) {
             return (
                 <div className="book-description-inner-container-info">
                     {this.props.activeMyBookDetails.description}
