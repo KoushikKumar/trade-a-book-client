@@ -20,9 +20,9 @@ class RightPage extends Component {
                 <div className="book-details-right-page-container">
                     <BookImageDetails />
                     <BookDescription />
-                    <RequestButton />
+                    {this.renderRequestButton(this.props.bookdetailsById)}
                     <hr className="horizontal-line-info"/>
-                    <SellerInfo />
+                    {this.renderSellerOrBuyerInfo(this.props.bookdetailsById)}
                 </div>
             );
         }
@@ -47,6 +47,28 @@ class RightPage extends Component {
                     <BuyersInfo />
                 </div>
            ); 
+        }
+    }
+
+
+    renderRequestButton(bookDetails) {
+        if(!(this.props.isUserAuthenticated && 
+                        this.props.userData && 
+                        this.props.userData.userName===bookDetails["sellerInfo"]["name"])) {
+
+            return <RequestButton />
+        }
+        
+    }
+
+    renderSellerOrBuyerInfo(bookDetails) {
+        if(this.props.isUserAuthenticated && 
+                      this.props.userData && 
+                      this.props.userData.userName===bookDetails["sellerInfo"]["name"]) {
+
+            return <BuyersInfo />
+        } else {
+            return <SellerInfo />
         }
     }
 
@@ -87,7 +109,9 @@ function mapStateToProps(state) {
         bookData: state.book.bookData,
         rightPageNumber: state.page.rightPageNumber,
         bookdetailsById: state.book.bookdetailsById,
-        activeMyBookDetails: state.book.activeMyBookDetails
+        activeMyBookDetails: state.book.activeMyBookDetails,
+        isUserAuthenticated : state.user.isUserAuthenticated,
+        userData: state.user.userData
     }
 }
 

@@ -15,8 +15,17 @@ class BuyersInfo extends Component {
     }
 
     renderBuyerDetails() {
-        if(this.props.activeMyBookDetails && this.props.activeMyBookDetails.buyersInfo) {
-            return Object.entries(this.props.activeMyBookDetails.buyersInfo).map(([key, value], index) => {
+        let bookDetails = {};
+        const activeMyBookDetails = this.props.activeMyBookDetails;
+        const bookdetailsById = this.props.bookdetailsById;
+        if(activeMyBookDetails && activeMyBookDetails.buyersInfo) {
+            bookDetails = activeMyBookDetails;
+        } else if(bookdetailsById && bookdetailsById.buyersInfo) {
+            bookDetails = bookdetailsById;
+        }
+
+        if(bookDetails && bookDetails.buyersInfo) {
+            return Object.entries(bookDetails.buyersInfo).map(([key, value], index) => {
                 return(
                     <div className="buyer" key={index}>
                         <div className="buyer-name-and-address">  
@@ -27,14 +36,14 @@ class BuyersInfo extends Component {
                                 {value.address}
                             </div>
                         </div>
-                        {this.renderRequestStatus(value.status, key)}
+                        {this.renderRequestStatus(value.status, key, bookDetails)}
                     </div>
                 ); 
             });
         }
     }
 
-    renderRequestStatus(status, buyerName) {
+    renderRequestStatus(status, buyerName, bookDetails) {
         const updateStyleOfAcceptedButton = {};
         const updateStyleOfRejectedButton = {};
         if(status === REQUEST_ACCEPTED) {
@@ -44,21 +53,21 @@ class BuyersInfo extends Component {
         }
         return (
             <div className="request-status">
-                <div onClick={() => this.updateRequestedStatus(status, REQUEST_ACCEPTED, buyerName)} className="request-accept" style={updateStyleOfAcceptedButton}>
+                <div onClick={() => this.updateRequestedStatus(status, REQUEST_ACCEPTED, buyerName, bookDetails)} className="request-accept" style={updateStyleOfAcceptedButton}>
                     <i className="fa fa-check" aria-hidden="true"></i>
                 </div>
-                <div onClick={() => this.updateRequestedStatus(status, REQUEST_REJECTED, buyerName)} className="request-reject" style={updateStyleOfRejectedButton}>
+                <div onClick={() => this.updateRequestedStatus(status, REQUEST_REJECTED, buyerName, bookDetails)} className="request-reject" style={updateStyleOfRejectedButton}>
                     <i className="fa fa-times" aria-hidden="true"></i>
                 </div>
             </div>
         )
     }
 
-    updateRequestedStatus(currentStatus, updatedStatus, buyerName) {
+    updateRequestedStatus(currentStatus, updatedStatus, buyerName, bookDetails) {
         if(currentStatus === updatedStatus) {
-            this.props.updateRequestedStatus(REQUEST_PENDING, this.props.activeMyBookDetails._id, buyerName);
+            this.props.updateRequestedStatus(REQUEST_PENDING, bookDetails._id, buyerName);
         } else {
-            this.props.updateRequestedStatus(updatedStatus, this.props.activeMyBookDetails._id, buyerName);
+            this.props.updateRequestedStatus(updatedStatus, bookDetails._id, buyerName);
         }
     }
 
@@ -76,7 +85,8 @@ class BuyersInfo extends Component {
 
 function mapStateToProps(state) {
     return {
-        activeMyBookDetails: state.book.activeMyBookDetails
+        activeMyBookDetails: state.book.activeMyBookDetails,
+        bookdetailsById: state.book.bookdetailsById
     }
 }
 

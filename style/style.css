@@ -413,7 +413,7 @@ body {
     align-items: center;
 }
 
-.buyer:nth-child(odd) {
+.buyer:nth-child(even) {
      background-color: #E7E7E7;
 }
 
